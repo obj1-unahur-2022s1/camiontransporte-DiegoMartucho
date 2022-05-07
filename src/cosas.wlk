@@ -22,7 +22,7 @@ object bumblebee
 		
 	method peligrosidad()
 		{
-		if (estado == auto) {return 15} else {return 30}
+		if (estado == "auto") {return 15} else {return 30}
 		}
 	
 	method setEstado(nuevoEstado)
@@ -53,35 +53,26 @@ object paqueteLadrillos
 
 object arena
 	{
- var peso
-
-	method peso()
-		{
-		return peso
-		}
+ var property peso
 	
 	method peligrosidad()
 		{
 		return 1
 		}
-		
-	method setPeso(kilos)
-		{
-		peso = kilos
-		}
 	}
 
-object bateriaAntiarea
+object bateriaAntiaerea
 	{
- var estado
+ var estado 
+ 
 	method peso()
 		{
-		if (estado == conMisiles) {return 300} else {return 200}
+		if (estado == "con misiles") {return 300} else {return 200}
 		}
 	
 	method peligrosidad()
 		{
-		if (estado == conMisiles) {return 100} else {return 0}
+		if (estado == "con misiles") {return 100} else {return 0}
 		}
 		
 	method setEstado(portacion)
@@ -92,59 +83,57 @@ object bateriaAntiarea
 
 object contenedor
 	{
- var cosasDentro
+ var cosasDentro = []
 
 	method peso()
 		{
-		// return 100 + cosasDentro
+		return cosasDentro.sum({ interior => interior.peso() }) + 100
 		}
 		
 	method peligrosidad()
 		{
-		// return nivel de peligro de la cosa mas peligrosa que lleva dentro 
+		if (cosasDentro.isEmpty()) 
+			{
+			return 0
+			}
+		else
+			{
+			return cosasDentro.map({ interior => interior.peligrosidad() }).max()
+			}
 		}
-		
-	method setInterior(lista)
+
+	method setInterior(objeto)
 		{
-		cosasDentro = lista // supongamos que esto esta bien
+		cosasDentro.add(objeto)
 		}
 	}
 
 object residuosRadioactivos
 	{
- var peso
- 
-	method peso()
-		{
-		return peso
-		}
-		
+ var property peso
+ 	
 	method peligrosidad()
 		{
 		return 200
-		}
-		
-	method setPeso(kilos)
-		{
-		peso = kilos
 		}
 	}
 
 object embalajeSeguridad
 	{
- var cosaDentro
+ var cosaDentro = []
  
 	method peso()
 		{
-		// return peso.cosaDentro
+		return cosaDentro.anyOne().peso()
 		}
 		
 	method peligrosidad()
 		{
-		// return ? / 2
+		return cosaDentro.anyOne().peligrosidad() / 2
+		} 
+		
+	method setInterior(objeto)
+		{
+		cosaDentro.add(objeto)
 		}
 	}
-
-
-
-

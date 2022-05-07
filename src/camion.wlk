@@ -1,57 +1,58 @@
 import cosas.*
 
-object camion
+object camion 
 	{
- var carga
+ var carga = []
  
-	method cargar(cosa)
+	method cargar(objeto)
 		{
-		// add.carga (o algo asi)
+		carga.add(objeto)
 		}
 		
-	method descargar(cosa)
+	method descargar(objeto)
 		{
-		// remove.carga (o lago asi)
+		carga.remove(objeto)
 		}
 		
 	method todoPesoPar()
 		{
-		// vemos mañana
+		return carga.all({ interior => interior.peso().even() })
 		}
 		
 	method hayAlgunoQuePesa(peso)
 		{
-		// algo de "find", creo...
+		return carga.any({ interior => interior.peso() == peso })
 		}
 		
 	method elDeNivel(nivel)
 		{
-		// algo de "filter", creo...
+		return carga.find({ interior => interior.peligrosidad() == nivel })
 		}
 		
 	method pesoTotal()
 		{
-		// vemos mañana...
+		return carga.sum({ interior => interior.peso() }) + 1000
 		}
 	
 	method excedidoDePeso()
 		{
-		// vemos mañana...
+		return self.pesoTotal() > 2500
 		}
 		
 	method objetosQueSuperanPeligrosidad(nivel)
 		{
-		// vemos mañana...
+		return carga.filter({ interior => interior.peligrosidad() == nivel })
 		}
 		
 	method objetosMasPeligrososQue(cosa)
 		{
-		// vemos mañana...
+		return carga.filter({ interior => interior.peligrosidad() > cosa.peligrosidad() })
 		}
 	
 	method puedeCircularEnRuta(nivelMaximoPeligrosidad)
 		{
-		// vemos mañana...
+		return not self.excedidoDePeso() and 
+		carga.all({ interior => interior.peligrosidad() < nivelMaximoPeligrosidad })
 		}
 		
 	method tieneAlgoQuePesaEntre(min, max)
