@@ -41,7 +41,7 @@ object camion
 		
 	method objetosQueSuperanPeligrosidad(nivel)
 		{
-		return carga.filter({ interior => interior.peligrosidad() == nivel })
+		return carga.filter({ interior => interior.peligrosidad() > nivel })
 		}
 		
 	method objetosMasPeligrososQue(cosa)
@@ -51,49 +51,22 @@ object camion
 	
 	method puedeCircularEnRuta(nivelMaximoPeligrosidad)
 		{
-		return not self.excedidoDePeso() and 
-		carga.all({ interior => interior.peligrosidad() < nivelMaximoPeligrosidad })
+		return carga.all({ interior => interior.peligrosidad() < nivelMaximoPeligrosidad })
+		and not self.excedidoDePeso()
 		}
 		
 	method tieneAlgoQuePesaEntre(min, max)
 		{
-		// "contains"?, no lo se...
+		return carga.any({ interior => interior.peso().between(min, max) })
 		}
 		
 	method cosaMasPesada()
 		{
-		// vemos mañana...
+		return carga.max({ interior => interior.peso() })
 		}
 		
 	method pesos()
 		{
-		// una listita, perrooo
+		return carga.map({ interior => interior.peso() })
 		}
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
