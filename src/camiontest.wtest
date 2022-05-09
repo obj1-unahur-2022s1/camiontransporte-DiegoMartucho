@@ -1,3 +1,178 @@
 import camion.*
 import cosas.*
 
+test "peso par en el camion"
+	{
+	bumblebee.setEstado("robot")
+	arena.peso(150)
+	bateriaAntiaerea.setEstado("con misiles")
+	paqueteLadrillos.setLadrillos(80)
+	embalajeSeguridad.setInterior(paqueteLadrillos)
+	camion.cargar(bumblebee)
+	camion.cargar(arena)
+	camion.cargar(bateriaAntiaerea)
+	camion.cargar(paqueteLadrillos)
+	camion.cargar(embalajeSeguridad)
+	
+	assert.that(camion.todoPesoPar())
+	}
+
+test "busqueda de un peso en el camion"
+	{
+	bumblebee.setEstado("robot")
+	arena.peso(150)
+	bateriaAntiaerea.setEstado("con misiles")
+	paqueteLadrillos.setLadrillos(80)
+	embalajeSeguridad.setInterior(paqueteLadrillos)
+	camion.cargar(bumblebee)
+	camion.cargar(arena)
+	camion.cargar(bateriaAntiaerea)
+	camion.cargar(paqueteLadrillos)
+	camion.cargar(embalajeSeguridad)
+	
+	assert.that(camion.hayAlgunoQuePesa(800))
+	}
+	
+test "busqueda de un objeto por su nivel"
+	{
+	bumblebee.setEstado("robot")
+	arena.peso(150)
+	bateriaAntiaerea.setEstado("con misiles")
+	paqueteLadrillos.setLadrillos(80)
+	embalajeSeguridad.setInterior(paqueteLadrillos)
+	camion.cargar(bumblebee)
+	camion.cargar(arena)
+	camion.cargar(bateriaAntiaerea)
+	camion.cargar(paqueteLadrillos)
+	camion.cargar(embalajeSeguridad)
+	
+	assert.that(camion.elDeNivel(30) == bumblebee)
+	}
+	
+test "peso total del camion"
+	{
+	bumblebee.setEstado("robot")
+	arena.peso(150)
+	bateriaAntiaerea.setEstado("con misiles")
+	paqueteLadrillos.setLadrillos(80)
+	embalajeSeguridad.setInterior(paqueteLadrillos)
+	camion.cargar(bumblebee)
+	camion.cargar(arena)
+	camion.cargar(bateriaAntiaerea)
+	camion.cargar(paqueteLadrillos)
+	camion.cargar(embalajeSeguridad)	
+		
+	assert.that(camion.pesoTotal() == 2570)
+	}
+	
+test "peso excedido"
+	{
+	bumblebee.setEstado("robot")
+	arena.peso(150)
+	bateriaAntiaerea.setEstado("con misiles")
+	paqueteLadrillos.setLadrillos(80)
+	embalajeSeguridad.setInterior(paqueteLadrillos)
+	camion.cargar(bumblebee)
+	camion.cargar(arena)
+	camion.cargar(bateriaAntiaerea)
+	camion.cargar(paqueteLadrillos)
+	camion.cargar(embalajeSeguridad)
+	
+	assert.that(camion.excedidoDePeso())
+	}
+	
+test "coleccion de objetos peligrosos"
+	{
+	bumblebee.setEstado("robot")
+	arena.peso(150)
+	bateriaAntiaerea.setEstado("con misiles")
+	paqueteLadrillos.setLadrillos(80)
+	embalajeSeguridad.setInterior(paqueteLadrillos)
+	camion.cargar(bumblebee)
+	camion.cargar(arena)
+	camion.cargar(bateriaAntiaerea)
+	camion.cargar(paqueteLadrillos)
+	camion.cargar(embalajeSeguridad)
+	
+	assert.that(camion.objetosQueSuperanPeligrosidad(50) == [bateriaAntiaerea])
+	}
+	
+test "coleccion de objetos muy peligrosos"
+	{
+	bumblebee.setEstado("robot")
+	arena.peso(150)
+	bateriaAntiaerea.setEstado("con misiles")
+	paqueteLadrillos.setLadrillos(80)
+	embalajeSeguridad.setInterior(paqueteLadrillos)
+	camion.cargar(bumblebee)
+	camion.cargar(arena)
+	camion.cargar(bateriaAntiaerea)
+	camion.cargar(paqueteLadrillos)
+	camion.cargar(embalajeSeguridad)
+	
+	assert.that(camion.objetosMasPeligrososQue(bumblebee) == [bateriaAntiaerea])
+	}
+	
+test "permiso de circulacion"
+	{
+	bumblebee.setEstado("robot")
+	arena.peso(150)
+	bateriaAntiaerea.setEstado("con misiles")
+	paqueteLadrillos.setLadrillos(80)
+	embalajeSeguridad.setInterior(paqueteLadrillos)
+	camion.cargar(bumblebee)
+	camion.cargar(arena)
+	camion.cargar(bateriaAntiaerea)
+	camion.cargar(paqueteLadrillos)
+	camion.cargar(embalajeSeguridad)
+	
+	assert.notThat(camion.puedeCircularEnRuta(150))
+	}
+	
+test "busqueda de un rango de peso en el camion"
+	{
+	bumblebee.setEstado("robot")
+	arena.peso(150)
+	bateriaAntiaerea.setEstado("con misiles")
+	paqueteLadrillos.setLadrillos(80)
+	embalajeSeguridad.setInterior(paqueteLadrillos)
+	camion.cargar(bumblebee)
+	camion.cargar(arena)
+	camion.cargar(bateriaAntiaerea)
+	camion.cargar(paqueteLadrillos)
+	camion.cargar(embalajeSeguridad)
+	
+	assert.that(camion.tieneAlgoQuePesaEntre(500, 1000))
+	}
+	
+test "busqueda de la cosa mas pesada en el camion"
+	{
+	bumblebee.setEstado("robot")
+	arena.peso(150)
+	bateriaAntiaerea.setEstado("con misiles")
+	paqueteLadrillos.setLadrillos(80)
+	embalajeSeguridad.setInterior(paqueteLadrillos)
+	camion.cargar(bumblebee)
+	camion.cargar(arena)
+	camion.cargar(bateriaAntiaerea)
+	camion.cargar(paqueteLadrillos)
+	camion.cargar(embalajeSeguridad)
+	
+	assert.that(camion.cosaMasPesada() == bumblebee)
+	}
+	
+test "lista de los pesos que hay en el camion"
+	{
+	bumblebee.setEstado("robot")
+	arena.peso(150)
+	bateriaAntiaerea.setEstado("con misiles")
+	paqueteLadrillos.setLadrillos(80)
+	embalajeSeguridad.setInterior(paqueteLadrillos)
+	camion.cargar(bumblebee)
+	camion.cargar(arena)
+	camion.cargar(bateriaAntiaerea)
+	camion.cargar(paqueteLadrillos)
+	camion.cargar(embalajeSeguridad)
+	
+	assert.that(camion.pesos() == [800, 150, 300, 160, 160])
+	}

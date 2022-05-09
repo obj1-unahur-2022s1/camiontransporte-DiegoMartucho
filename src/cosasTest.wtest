@@ -1,2 +1,32 @@
 import camion.*
 import cosas.*
+
+test "paquete de ladrillos"
+	{
+	paqueteLadrillos.setLadrillos(10)
+	
+	assert.that(paqueteLadrillos.peso() == 20)
+	}
+	
+test "bateria antiaerea"
+	{
+	bateriaAntiaerea.setEstado("con misiles")
+	
+	assert.that(bateriaAntiaerea.peligrosidad() == 100)
+	}
+	
+test "contenedor portuario"
+	{
+	contenedor.setInterior(knightRider)
+	contenedor.setInterior(bumblebee)
+	
+	assert.that(contenedor.peso() == 1400)
+	}
+	
+test "emabalaje de seguridad"
+	{
+	residuosRadioactivos.peso(30)
+	embalajeSeguridad.setInterior(residuosRadioactivos)
+	
+	assert.that(embalajeSeguridad.peligrosidad() == 100)
+	}
