@@ -1,3 +1,8 @@
+/*
+ * camion2: Bien. Faltó agregar en el método cargar(objeto) que el objeto sufra la
+ * consecuencia de la carga.
+ */
+
 import cosas2.*
 
 object camion 
@@ -7,6 +12,7 @@ object camion
 	method cargar(objeto)
 		{
 		carga.add(objeto)
+		objeto.consecuenciaCarga()
 		}
 		
 	method descargar(objeto)
